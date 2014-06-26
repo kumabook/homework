@@ -1,0 +1,12 @@
+#include <cstdio>
+#include <algorithm>
+#include <cassert>
+
+using namespace std;
+
+int main()
+{
+  char new_line;
+
+  scanf("%d %d", ,
+}

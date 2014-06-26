@@ -1,0 +1,16 @@
+牛の群れがトラックに乗せられ、ジャングルの奥地へと向かっています。ドライバーは貧乏なので、牛たちは不運にも岩の上を走ったり、トラックの燃料タンクをパンクさせました。トラックは、今、１ユニット進むごとに１ユニットずつ漏れてしまいます。
+　トラックを修理するためには、牛たちは長く曲がりくねった道を通って、近くの町へ行かなければなりません。現在地からこの町までの間にN(1 <= N <= 10,000)個の追加の燃料が手に入る給油所があります。(それぞれ1..100の燃料)
+
+ジャングルは人にとっては危険な場所であり、牛にとっても特に危険なところである。それゆえ、牛たちは町までに立ち寄る給油所は最小限にしたい。幸運にも、燃料タンクの要領はとても多く、給油できる燃料に制限はない。トラックは町からLユニットほど離れていて、Pユニットの燃料がある。
+
+　町につくまでに最低限立ち寄らなければない給油所の数、もしくは町までたどり着けないかどうかを求めよ。
+
+A group of cows grabbed a truck and ventured on an expedition deep into the jungle. Being rather poor drivers, the cows unfortunately managed to run over a rock and puncture the truck's fuel tank. The truck now leaks one unit of fuel every unit of distance it travels.
+
+To repair the truck, the cows need to drive to the nearest town (no more than 1,000,000 units distant) down a long, winding road. On this road, between the town and the current location of the truck, there are N (1 <= N <= 10,000) fuel stops where the cows can stop to acquire additional fuel (1..100 units at each stop).
+
+The jungle is a dangerous place for humans and is especially dangerous for cows. Therefore, the cows want to make the minimum possible number of stops for fuel on the way to the town. Fortunately, the capacity of the fuel tank on their truck is so large that there is effectively no limit to the amount of fuel it can hold. The truck is currently L units away from the town and has P units of fuel (1 <= P <= 1,000,000).
+
+Determine the minimum number of stops needed to reach the town, or if the cows cannot reach the town at all.
+
+Input
