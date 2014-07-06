@@ -11,7 +11,7 @@ int main() {
 
   cin >> T;
 
-  for (int t = 0; t < T; t++) {
+  for (int i = 0; i < T; i++) {
     int N, S;
     scanf("%d %d", &N, &S);
     vector<int> sequence(N);
@@ -19,27 +19,25 @@ int main() {
       scanf("%d", &sequence[i]);
     }
 
-    vector<int> sum(N);
-    sum[0] = sequence[0];
-    for (int i = 1; i < N; i++) {
-      sum[i] = sum[i - 1] + sequence[i];
-    }
 
-    if (sum[N - 1] < S) {
-      printf("0\n");
-    } else {
-      int length = N - 1;
-      for (int s = 0; s < N; s++) {
-        // sum[end] - sum[start] >= S -------> sum[end] >= S + sum[start - 1]
-        int bound = (s == 0 ? 0 : sum[s - 1]) + S;
-        int end = lower_bound(sum.begin() + s, sum.end(), bound) - sum.begin();
-        if (end == N) {
-          break;
-        }
-        length = min(length, end - s + 1);
+    int s = 0, t = 0, sum = 0;
+    int length = N + 1;
+
+    while (true) {
+      while (sum < S && t < N) {
+        sum += sequence[t++];
       }
-      printf("%d\n", length);
+      if (sum < S) {
+        break;
+      }
+      length = min(length, t - s);
+      sum -= sequence[s++];
     }
+    if (length > N) {
+      length = 0;
+    }
+    printf("%d\n", length);
   }
+
   return 0;
 }
