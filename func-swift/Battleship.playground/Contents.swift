@@ -37,3 +37,56 @@ func inRange4(target: Position, ownPosition: Position, friendly: Position, range
         && friendlyDistance > minimumDistance
     
 }
+
+typealias Region = Position -> Bool
+
+// func pointInRange(point: Position) -> Bool {}
+
+func circle(radius: Distance) -> Region {
+    return { point in
+        sqrt(point.x * point.x + point.y * point.y) <= radius
+    }
+}
+
+// not functional
+func circle2(radius: Distance, _ center: Position) -> Region {
+    return { point in
+        let shiftedPoint = Position(x: point.x - center.x,
+                                    y: point.y - center.y)
+        return sqrt(shiftedPoint.x * shiftedPoint.x + shiftedPoint.y * shiftedPoint.y) <= radius
+    }
+}
+
+func shift(offset: Position, _ region: Region) -> Region {
+    return { point in
+        let shiftedPoint = Position(x: point.x - offset.x,
+                                    y: point.y - offset.y)
+        return region(shiftedPoint)
+    }
+}
+
+shift(Position(x: 5, y: 5), circle(10))
+
+func invert(region: Region) -> Region {
+    return { point in !region(point) }
+}
+
+func intersection(region1: Region, _ region2: Region) -> Region {
+    return { point in region1(point) && region2(point) }
+}
+
+func union(region1: Region, _ region2: Region) -> Region {
+    return { point in region1(point) || region2(point) }
+}
+
+func difference(region: Region, _ minusRegion: Region) -> Region {
+    return intersection(region, invert(minusRegion))
+}
+
+func inRange(ownPosition: Position, _ target: Position, _ friendly: Position, _ range: Distance) -> Bool {
+    let rangeRegion = difference(circle(range), circle(minimumDistance))
+    let targetRegion = shift(ownPosition, rangeRegion)
+    let friendlyRegion = shift(friendly, circle(minimumDistance))
+    let resultRegion = difference(targetRegion, friendlyRegion)
+    return resultRegion(target)
+}
